@@ -3078,12 +3078,6 @@ static int m88rs6060_tune(struct dvb_frontend *fe, bool re_tune,
 
 	*delay = HZ / 2;
 
-	dev_info(&i2c->dev,
-         "freq=%u sr=%u sys=%d\n",
-         c->frequency,
-         c->symbol_rate,
-         c->delivery_system);
-
 	if (re_tune) {
 		r = m88rs6060_set_frontend(fe);
 		if (r)
