@@ -1838,6 +1838,12 @@ static int m88rs6060_set_frontend(struct dvb_frontend *fe)
 	unsigned tsid[16];
 	bool mis = false;
 
+	dev_info(&i2c->dev,
+         "freq=%u sr=%u sys=%d\n",
+         c->frequency,
+         c->symbol_rate,
+         c->delivery_system);
+
 	dev_dbg(&i2c->dev,
 		 "delivery_system=%u modulation=%u frequency=%u bandwidth_hz=%u symbol_rate=%u inversion=%u stream_id=%d\n",
 		 c->delivery_system, c->modulation, c->frequency,
@@ -3071,6 +3077,13 @@ static int m88rs6060_tune(struct dvb_frontend *fe, bool re_tune,
 	int r = 0;
 
 	*delay = HZ / 2;
+
+	dev_info(&i2c->dev,
+         "freq=%u sr=%u sys=%d\n",
+         c->frequency,
+         c->symbol_rate,
+         c->delivery_system);
+
 	if (re_tune) {
 		r = m88rs6060_set_frontend(fe);
 		if (r)
