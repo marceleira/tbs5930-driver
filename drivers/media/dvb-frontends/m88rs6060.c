@@ -2530,6 +2530,12 @@ static int m88rs6060_read_status(struct dvb_frontend *fe,
 	switch (c->delivery_system) {
 	case SYS_DVBS:
 		ret = regmap_read(dev->regmap, 0x0d, &utmp);
+
+		dev_info(&i2c->dev,
+         "delivery=%d reg0d=0x%02x\n",
+         c->delivery_system,
+         utmp);
+
 		if (ret)
 			goto err;
 
@@ -2541,6 +2547,11 @@ static int m88rs6060_read_status(struct dvb_frontend *fe,
 		ret = regmap_read(dev->regmap, 0x0d, &utmp);
 		if (ret)
 			goto err;
+
+		dev_info(&i2c->dev,
+         "delivery=%d reg0d=0x%02x\n",
+         c->delivery_system,
+         utmp);
 
 		if ((utmp & 0x8f) == 0x8f)
 			*status = FE_HAS_SIGNAL | FE_HAS_CARRIER |
